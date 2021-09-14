@@ -1,0 +1,20 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Files #
+###################
+*.env
+*.lock
+*.sql
+
+# Folder to ignore #
+###################
+vendor/
+node_modules/
+storage/

@@ -1,0 +1,50 @@
+<?php $v->layout("_template"); ?>
+
+<section id="home" class="active">
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">Bem Vindo</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">
+                Seja muito bem vindo a nossa página. Acesse o menu ao lado e veja as mais diversas informações
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="soccer">
+    <div class="soccer-menu">
+        <button class="btn btn-link" data-competitions="http://api.football-data.org/v2/competitions">
+            Lista de Competições
+        </button>
+        <button class="btn btn-link" data-matchs="http://api.football-data.org/v2/matches">
+            Jogos de hoje
+        </button>
+    </div>
+    <hr/>
+
+    <div class="soccer-content">
+        <section class="soccer-competition">
+            <table class="table table-competition">
+            </table>
+            <div class="competition-detailed" style="display: none;">
+            </div>
+        </section>
+
+        <section class="soccer-matches">
+        </section>
+    </div>
+</section>
+
+<div class="offcanvas end offcanvas-standings">
+    <div class="header">
+        <div class="header-top">
+            <span class="fs-5 title"></span>
+            <button type="button" class="btn" class="close" data-offcanvas-close="offcanvas" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div class="body">
+    </div>
+</div>
+

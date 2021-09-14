@@ -1,0 +1,170 @@
+/* DEFAULT LOAD */
+.default-load {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2100;
+}
+
+.default-load-box {
+    margin: auto;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.default-load-box-circle {
+    border: 16px solid #e3e3e3;
+    border-top: 16px solid #1f2940;
+    border-radius: 50%;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+
+    -webkit-animation: spin 1.2s linear infinite;
+    -o-animation: spin 1.2s linear infinite;
+    animation: spin 1.2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.padding-left-zero {
+    padding-left: 0;
+}
+
+.padding-right-zero {
+    padding-right: 0;
+}
+
+.no-margin-x {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+/**
+ * ####################
+ * #### OFFCANVAS #####
+ * ####################
+ */
+
+.offcanvas {
+    position: fixed;
+    display: flex;
+    width: 500px;
+    background-color: #fff;
+    background-clip: padding-box;
+    outline: 0;
+    transition: transform .3s ease-in-out;
+    flex-direction: column;
+    z-index: 2100;
+    border-bottom: 1px solid rgba(5, 2, 2, 0.2);
+    visibility: unset;
+}
+
+.offcanvas.end {
+    top: 0;
+    right: 0;
+    border-left: 1px solid rgba(136, 136, 136, 0.2);;
+    transform: translateX(100%);
+}
+
+.offcanvas.start {
+    top: 0;
+    left: 0;
+    border-right: 1px solid rgba(5, 2, 2, 0.2);
+    transform: translateX(-100%);
+}
+
+.offcanvas.show {
+    transform: none;
+}
+
+.offcanvas .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.offcanvas .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.offcanvas .body {
+    flex-grow: 1;
+    padding: 1rem 1rem;
+    overflow-y: auto;
+}
+
+
+.app section:not(.active) {
+    display: none;
+}
+
+#soccer {
+    padding: 20px 0;
+}
+
+#soccer .soccer-menu {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.table-competition td,
+.table-competition th {
+    text-align: center;
+}
+
+.table-competition .competitionOptions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.competition-detailed {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.competition-detailed .championship-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.competition-detailed .championship-body {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.soccer-content section:not(.active) {
+    display: none;
+}

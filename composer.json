@@ -1,0 +1,24 @@
+{
+    "name": "melquespaiva/ihm",
+    "description": "Projeto para disciplina de Interface Homem Máquina",
+    "authors": [
+        {
+            "name": "MelquesPaiva",
+            "email": "melque1703@gmail.com"
+        }
+    ],
+    "require": {
+        "coffeecode/router": "^1.0",
+        "coffeecode/paginator": "^1.0",
+        "league/plates": "v4.0.0-alpha"
+    },
+    "autoload": {
+        "files": [
+            "src/Boot/Config.php",
+            "src/Boot/Helpers.php"
+        ],
+        "psr-4": {
+            "Source\\": "src/"
+        }
+    }
+}
