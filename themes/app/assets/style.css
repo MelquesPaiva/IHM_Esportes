@@ -126,11 +126,13 @@
     display: none;
 }
 
-#soccer {
+#soccer,
+#covid {
     padding: 20px 0;
 }
 
-#soccer .soccer-menu {
+#soccer .soccer-menu,
+#covid .covid {
     display: flex;
     justify-content: start;
     align-items: center;
@@ -167,4 +169,15 @@
 
 .soccer-content section:not(.active) {
     display: none;
+}
+
+@media(max-width: 1068px) {
+    .covid-head {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .covid-head .badge {
+        margin: 4px 0 !important;
+    }
 }

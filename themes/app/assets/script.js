@@ -25,7 +25,7 @@ function strLimit(stringValue, limit = 50, end = '...') {
     return stringValue.substr(0, limit) + '...';
 }
 
-$(function() {
+$(function () {
     const defaultLoad = $('.default-load');
     let competitionsList = [];
     let matches = [];
@@ -33,7 +33,7 @@ $(function() {
     /**
      * Fazendo listagem de competições
      */
-    $("[data-competitions]").click(function(e) {
+    $("[data-competitions]").click(function (e) {
         let currentActive = $('.soccer-content .active');
         if (currentActive.length != 0) {
             currentActive.removeClass('active');
@@ -55,7 +55,7 @@ $(function() {
             url: action + '?plan=TIER_ONE',
             dataType: 'json',
             type: 'GET',
-        }).done(function(response) {
+        }).done(function (response) {
             const table = $('.table-competition');
             competitionsList = response.competitions;
 
@@ -105,7 +105,7 @@ $(function() {
     /**
      * Apresetando detalhes de competição
      */
-    $(document).on('click', '[data-competition_detail]', function(e) {
+    $(document).on('click', '[data-competition_detail]', function (e) {
         let clicked = $(this);
         let action = clicked.data('competition_detail');
 
@@ -116,7 +116,7 @@ $(function() {
             url: action,
             dataType: 'json',
             type: 'GET'
-        }).done(function(response) {
+        }).done(function (response) {
             const championshipDetailed = $('.competition-detailed');
             let championshipHtml = '';
 
@@ -177,7 +177,7 @@ $(function() {
     /**
      * Classificação atual do campeonato
      */
-    $(document).on('click', '[data-competition_stadings]', function(e) {
+    $(document).on('click', '[data-competition_stadings]', function (e) {
         const offcanvas = $('.offcanvas-standings');
         const body = $('.offcanvas-standings .body');
         let clicked = $(this);
@@ -190,7 +190,7 @@ $(function() {
             url: action,
             dataType: 'json',
             type: 'GET'
-        }).done(function(response) {
+        }).done(function (response) {
             body.html('');
 
             $('.offcanvas-standings .title').html(response.competition.name);
@@ -230,7 +230,7 @@ $(function() {
 
             offcanvas.addClass('show');
             defaultLoad.css('display', 'none');
-        }).fail(function(response) {
+        }).fail(function (response) {
             defaultLoad.css('display', 'none');
             alert('Tabela de Classificação não encontrada');
         });
@@ -239,7 +239,7 @@ $(function() {
     /**
      * Artilharia atual do campeonato
      */
-    $(document).on('click', '[data-competition_scores]', function(e) {
+    $(document).on('click', '[data-competition_scores]', function (e) {
         const offcanvas = $('.offcanvas-standings');
         const body = $('.offcanvas-standings .body');
         let clicked = $(this);
@@ -252,7 +252,7 @@ $(function() {
             url: action,
             dataType: 'json',
             type: 'GET'
-        }).done(function(response) {
+        }).done(function (response) {
             body.html('');
 
             $('.offcanvas-standings .title').html(response.competition.name);
@@ -282,7 +282,7 @@ $(function() {
 
             offcanvas.addClass('show');
             defaultLoad.css('display', 'none');
-        }).fail(function(response) {
+        }).fail(function (response) {
             defaultLoad.css('display', 'none');
             alert('Tabela de Artilheiros não encontrada');
         });
@@ -291,7 +291,7 @@ $(function() {
     /**
      * Partidas de hoje
      */
-    $('[data-matchs]').click(function(e) {
+    $('[data-matchs]').click(function (e) {
         let currentActive = $('.soccer-content .active');
         if (currentActive.length != 0) {
             currentActive.removeClass('active');
@@ -316,7 +316,7 @@ $(function() {
             url: action,
             dataType: 'json',
             type: 'GET'
-        }).done(function(response) {
+        }).done(function (response) {
             let matches = response.matches;
 
             for (var i in matches) {
@@ -345,7 +345,7 @@ $(function() {
                 matchesHtml += '<div class="row no-margin-x">';
                 matchesHtml += '<div class="col-12 padding-left-zero padding-right-zero fw-bold mb-2">Competição: ' + match.competition.name + '</div>';
                 matchesHtml += '<div class="col-2 padding-left-zero padding-right-zero ' + teamHomeScoreClass + '">' + strLimit(match.homeTeam.name, 20) + '</div>';
-                matchesHtml += '<div class="col-2 padding-left-zero padding-right-zero fw-bold ' + teamHomeScoreClass + '">' + homeTeamScore  + '</div>';
+                matchesHtml += '<div class="col-2 padding-left-zero padding-right-zero fw-bold ' + teamHomeScoreClass + '">' + homeTeamScore + '</div>';
                 matchesHtml += '<div class="col-2 padding-left-zero padding-right-zero"> X </div>';
                 matchesHtml += '<div class="col-2 padding-left-zero padding-right-zero fw-bold ' + teamAwayScoreClass + '">' + awayTeamScore + '</div>';
                 matchesHtml += '<div class="col-2 padding-left-zero padding-right-zero ' + teamAwayScoreClass + '">' + strLimit(match.awayTeam.name, 20) + '</div>';
@@ -356,9 +356,125 @@ $(function() {
 
             soccerMathes.html(matchesHtml);
             defaultLoad.css('display', 'none');
+        }).fail(function (response) {
+            defaultLoad.css('display', 'none');
+            alert('Houve um erro ao recuperar as partidas');
         });
     });
 
+    $('[data-covid_cases]').click(function (e) {
+        const clicked = $(this);
+        const action = clicked.data("covid_cases");
+        const content = $('.covid-content');
+
+        content.html('');
+
+        defaultLoad.css('display', 'flex');
+
+        $.ajax({
+            url: action,
+            type: 'GET'
+        }).done(function(response) {
+            let casesHtml = '';
+            let allCases = response.All;
+
+            delete response.All;
+
+            casesHtml += '<div class="row mb-3">';
+            casesHtml += '<div class="col-12 mb-2">';
+            casesHtml += '<h4>Total de Casos</h4>';
+            casesHtml += '</div>';
+            casesHtml += '<div class="col-12 covid-head">';
+            casesHtml += '<span class="fs-6 badge bg-warning">Confirmados: ' + allCases.confirmed + '</span>';
+            casesHtml += '<span class="fs-6 badge bg-danger ms-2">Mortes: ' + allCases.deaths + '</span>';
+            casesHtml += '</div>';
+            casesHtml += '</div>';
+
+            casesHtml += '<table class="table">';
+            casesHtml += '<thead>';
+            casesHtml += '<tr>';
+            casesHtml += '<th>Estado</th>';
+            casesHtml += '<th>Confirmados</th>';
+            casesHtml += '<th>Mortes</th>';
+            casesHtml += '</tr>';
+            casesHtml += '</thead>';
+
+            casesHtml += '<tbody>';
+            for (var i in response) {
+                casesHtml += '<tr>';
+                casesHtml += '<td>' + i + '</td>';
+                casesHtml += '<td><span class="text-warning fw-bold">' + response[i].confirmed + '</span></td>';
+                casesHtml += '<td><span class="text-danger fw-bold">' + response[i].deaths + '</span></td>';
+                casesHtml += '</tr>';
+            }
+
+            casesHtml += '</tbody>';
+            casesHtml += '</table>';
+
+            defaultLoad.css('display', 'none');
+
+            content.html(casesHtml);
+        }).fail(function(response) {
+            alert("Houve um erro na recuperação de casos")
+        })
+    });
+
+    $('[data-covid_vaccines]').click(function (e) {
+        const clicked = $(this);
+        const action = clicked.data("covid_vaccines");
+        const content = $('.covid-content');
+
+        content.html('');
+
+        defaultLoad.css('display', 'flex');
+        $.ajax({
+            url: action,
+            type: 'GET'
+        }).done(function(response) {
+            let vaccinesHtml = '';
+            let allVaccines = response.All;
+
+            delete response.All;
+
+            vaccinesHtml += '<div class="row mb-3">';
+            vaccinesHtml += '<div class="col-12 mb-2">';
+            vaccinesHtml += '<h4>Vacinação</h4>';
+            vaccinesHtml += '</div>';
+            vaccinesHtml += '<div class="col-12 covid-head">';
+            vaccinesHtml += '<span class="fs-6 badge bg-secondary">População: ' + allVaccines.population + '</span>';
+            vaccinesHtml += '<span class="fs-6 badge bg-success ms-2">Vacinados: ' + allVaccines.administered + '</span>';
+            vaccinesHtml += '<span class="fs-6 badge bg-primary ms-2">Completamente: ' + allVaccines.people_vaccinated + '</span>';
+            vaccinesHtml += '<span class="fs-6 badge bg-warning ms-2">Parcialmente: ' + allVaccines.people_partially_vaccinated + '</span>';
+            vaccinesHtml += '</div>';
+            vaccinesHtml += '</div>';
+
+            vaccinesHtml += '<table class="table">';
+            vaccinesHtml += '<thead>';
+            vaccinesHtml += '<tr>';
+            vaccinesHtml += '<th colspan="2">Estado</th>';
+            vaccinesHtml += '<th>Vacinados</th>';
+            vaccinesHtml += '</tr>';
+            vaccinesHtml += '</thead>';
+
+            vaccinesHtml += '<tbody>';
+            for (var i in response) {
+                vaccinesHtml += '<tr>';
+                vaccinesHtml += '<td colspan="2">' + i + '</td>';
+                vaccinesHtml += '<td><span class="text-success fw-bold">' + response[i].administered + '</span></td>';
+                vaccinesHtml += '</tr>';
+            }
+
+            vaccinesHtml += '</tbody>';
+            vaccinesHtml += '</table>';
+
+            defaultLoad.css('display', 'none');
+
+            content.html(vaccinesHtml);
+        }).fail(function(response) {
+            defaultLoad.css('display', 'none');
+            alert("Houve um erro na recuperação de vacinas")
+        })
+    });
 
     /*
      * OFFCANVAS
